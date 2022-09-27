@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const photoShema = new Schema(
+const photoSchema = new Schema(
   {
     image: String,
     title: String,
     likes: Array,
     comments: Array,
-    userId: mongoose.isObjectIdOrHexString,
+    userId: mongoose.ObjectId,
     userName: String,
   },
   {
@@ -15,6 +15,6 @@ const photoShema = new Schema(
   }
 );
 
-const Photo = mongoose.model("Photo", photoShema);
+Photo = mongoose.model("Photo", photoSchema);
 
 module.exports = Photo;
