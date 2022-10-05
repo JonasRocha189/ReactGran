@@ -10,7 +10,7 @@ const initialState = {
   loading: false,
 };
 
-// Register an user and sign in
+// Register a user and sign in
 export const register = createAsyncThunk(
   "auth/register",
   async (user, thunkAPI) => {
@@ -25,12 +25,12 @@ export const register = createAsyncThunk(
   }
 );
 
-// Logout an user
+// Logout a user
 export const logout = createAsyncThunk("auth/logout", async () => {
   await authService.logout();
 });
 
-// Login an user
+// Sing in a user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
   const data = await authService.login(user);
 
@@ -56,7 +56,7 @@ export const authSlice = createSlice({
     builder
       .addCase(register.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(register.fulfilled, (state, action) => {
         state.loading = false;
@@ -69,15 +69,15 @@ export const authSlice = createSlice({
         state.error = action.payload;
         state.user = null;
       })
-      .addCase(logout.fulfilled, (state, action) => {
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
         state.loading = false;
         state.success = true;
         state.error = null;
-        state.user = null;
       })
       .addCase(login.pending, (state) => {
         state.loading = true;
-        state.error = false;
+        state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
         state.loading = false;

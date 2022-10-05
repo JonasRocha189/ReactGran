@@ -9,7 +9,7 @@ const register = async (data) => {
       .then((res) => res.json())
       .catch((err) => err);
 
-    if (res._id) {
+    if (res) {
       localStorage.setItem("user", JSON.stringify(res));
     }
 
@@ -19,26 +19,25 @@ const register = async (data) => {
   }
 };
 
-// Logout an user
+// Logout a user
 const logout = () => {
   localStorage.removeItem("user");
 };
 
-// Login an user
+// Sign in a user
 const login = async (data) => {
   const config = requestConfig("POST", data);
 
-  const res = await fetch(api + "/users/login", config)
-    .then((res) => res.json())
-    .catch((err) => err);
-
-  if (res._id) {
-    localStorage.setItem("user", JSON.stringify(res));
-  }
-
-  return res;
-
   try {
+    const res = await fetch(api + "/users/login", config)
+      .then((res) => res.json())
+      .catch((err) => err);
+
+    if (res) {
+      localStorage.setItem("user", JSON.stringify(res));
+    }
+
+    return res;
   } catch (error) {
     console.log(error);
   }

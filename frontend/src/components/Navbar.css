@@ -11,6 +11,7 @@
   position: relative;
   width: 20%;
 }
+
 #search-form svg {
   position: absolute;
   top: 10px;
@@ -27,7 +28,7 @@
 
 #nav-links {
   display: flex;
-  algin-items: center;
+  align-items: center;
 }
 
 #nav-links li {
